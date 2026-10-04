@@ -1,11 +1,16 @@
 📩 Spam SMS Detector - Live
 🚀 Live Demo: https://spam-classifier-rzpsvf3hwgdvfjxov6kbef.streamlit.app/
-Built by Khaleel Onoruoiza | Kano, Nigeria Accuracy: 96.5%
+Built by Khaleel Sadiq Onoruoiza
+Accuracy: 96.5%
 A real-time Machine Learning app that detects spam SMS messages.
+
+
 How it Works
 Dataset: 5572 SMS messages (Spam/Ham)
+
 Model: TF-IDF Vectorizer + Multinomial Naive Bayes
 Performance: 96.5% Accuracy, 100% Precision for Spam
+
 Tech: Python, Scikit-learn, Pandas, Streamlit
 Test It Yourself
 Try these on the live link:
