@@ -12,11 +12,16 @@ Model: TF-IDF Vectorizer + Multinomial Naive Bayes
 Performance: 96.5% Accuracy, 100% Precision for Spam
 
 Tech: Python, Scikit-learn, Pandas, Streamlit
+
 Test It Yourself
+
 Try these on the live link:
 Congratulations! You won $1000, click here → 🚨 SPAM
+
 Hi, are you coming for class today? → ✅ HAM
+
 Links
+
 Live App: https://spam-classifier-rzpsvf3hwgdvfjxov6kbef.streamlit.app/
 
 ⭐ Star this repo if you found it useful!
