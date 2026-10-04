@@ -13,5 +13,5 @@ Congratulations! You won $1000, click here → 🚨 SPAM
 Hi, are you coming for class today? → ✅ HAM
 Links
 Live App: https://spam-classifier-rzpsvf3hwgdvfjxov6kbef.streamlit.app/
-Built from scratch for Data Science Internship Portfolio
+
 ⭐ Star this repo if you found it useful!
