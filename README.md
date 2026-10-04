@@ -1,16 +1,17 @@
-Spam SMS Classifier
-A simple Machine Learning model that detects spam SMS messages. Built with Python, Scikit-learn, and Google Colab.
-Accuracy
-98.5%
-How it works
-Loads SMS dataset (ham vs spam)
-Converts text to numbers using TF-IDF
-Trains a Naive Bayes classifier
-Predicts if a message is SPAM or HAM
-Tech Stack
-Python
-Pandas
-Scikit-learn
-Google Colab
-Try it
-Open Spam_Classifier.ipynb in Google Colab
+📩 Spam SMS Detector - Live
+🚀 Live Demo: https://spam-classifier-rzpsvf3hwgdvfjxov6kbef.streamlit.app/
+Built by Khaleel Onoruoiza | Kano, Nigeria Accuracy: 96.5%
+A real-time Machine Learning app that detects spam SMS messages.
+How it Works
+Dataset: 5572 SMS messages (Spam/Ham)
+Model: TF-IDF Vectorizer + Multinomial Naive Bayes
+Performance: 96.5% Accuracy, 100% Precision for Spam
+Tech: Python, Scikit-learn, Pandas, Streamlit
+Test It Yourself
+Try these on the live link:
+Congratulations! You won $1000, click here → 🚨 SPAM
+Hi, are you coming for class today? → ✅ HAM
+Links
+Live App: https://spam-classifier-rzpsvf3hwgdvfjxov6kbef.streamlit.app/
+Built from scratch for Data Science Internship Portfolio
+⭐ Star this repo if you found it useful!
