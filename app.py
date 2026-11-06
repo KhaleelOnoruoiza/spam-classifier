@@ -1,7 +1,7 @@
 
 import streamlit as st
-import pickle
-from pathlib import Path
+from classifier import load_artifacts, predict_message
+
 
 # --------------------------------------------------
 # PAGE CONFIGURATION
@@ -14,30 +14,18 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-BASE_DIR = Path(__file__).resolve().parent
-
 
 # --------------------------------------------------
 # LOAD MODEL ARTIFACTS
 # --------------------------------------------------
 
 @st.cache_resource
-def load_artifacts():
-
-    with open(BASE_DIR / "spam_model.pkl", "rb") as f:
-        model = pickle.load(f)
-
-    with open(BASE_DIR / "vectorizer.pkl", "rb") as f:
-        vectorizer = pickle.load(f)
-
-    with open(BASE_DIR / "threshold.pkl", "rb") as f:
-        threshold = pickle.load(f)
-
-    return model, vectorizer, threshold
+def get_artifacts():
+    return load_artifacts()
 
 
 try:
-    model, vectorizer, threshold = load_artifacts()
+    model, vectorizer, threshold = get_artifacts()
 
 except FileNotFoundError as error:
     st.error(f"Required model file not found: {error.filename}")
@@ -186,27 +174,20 @@ with st.form("message_form"):
 
 if submitted:
 
-    if not msg.strip():
+    try:
+        result = predict_message(
+            msg,
+            model,
+            vectorizer,
+            threshold
+        )
 
-        st.warning("Please enter an SMS message before analysing.")
+        prediction = result["prediction"]
+        spam_probability = result["spam_probability"]
 
-    else:
+        if prediction == "spam":
 
-        # Convert message into TF-IDF features
-        message_vector = vectorizer.transform([msg])
-
-        # Find the spam class position
-        spam_index = list(model.classes_).index("spam")
-
-        # Estimate spam probability
-        spam_probability = model.predict_proba(
-            message_vector
-        )[0, spam_index]
-
-        # Apply the selected threshold
-        if spam_probability >= threshold:
-
-            st.error("🚨 Potential Spam Detected")
+            st.error("Potential Spam Detected")
 
             st.write(
                 "The model has classified this message as spam."
@@ -214,7 +195,7 @@ if submitted:
 
         else:
 
-            st.success("✓ Message Classified as Ham")
+            st.success("Message Classified as Ham")
 
             st.write(
                 "The model has classified this message as "
@@ -243,6 +224,39 @@ if submitted:
         st.progress(float(spam_probability))
 
         st.caption(
+            "The probability is the model's estimate, not a "
+            "guarantee. A message classified as ham may still "
+            "be unwanted or fraudulent."
+        )
+
+    except ValueError as error:
+        st.warning(str(error))
+
+
+# --------------------------------------------------
+# MODEL PERFORMANCE
+# --------------------------------------------------
+
+st.divider()
+
+st.subheader("Model performance")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric("Test accuracy", "~98%")
+
+with col2:
+    st.metric("Spam recall", "~84%")
+
+with col3:
+    st.metric("Spam precision", "100%")
+
+st.caption(
+    "Performance figures are from the reported held-out test "
+    "evaluation. Actual results may vary on new messages."
+)
+
             "The probability is the model's estimate, not a "
             "guarantee. A message classified as ham may still "
             "be unwanted or fraudulent."
