@@ -1,4 +1,5 @@
 
+
 import streamlit as st
 from classifier import load_artifacts, predict_message
 
@@ -255,45 +256,4 @@ with col3:
 st.caption(
     "Performance figures are from the reported held-out test "
     "evaluation. Actual results may vary on new messages."
-)
-
-            "The probability is the model's estimate, not a "
-            "guarantee. A message classified as ham may still "
-            "be unwanted or fraudulent."
-        )
-
-
-# --------------------------------------------------
-# MODEL PERFORMANCE
-# --------------------------------------------------
-
-st.divider()
-
-st.subheader("Model performance")
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.metric("Test accuracy", "~98%")
-
-with col2:
-    st.metric("Spam recall", "~84%")
-
-with col3:
-    st.metric("Spam precision", "100%")
-
-st.caption(
-    "Performance figures are from the reported held-out test "
-    "evaluation. Actual results may vary on new messages."
-)
-
-# --------------------------------------------------
-# FOOTER
-# --------------------------------------------------
-
-st.divider()
-
-st.caption(
-    "SMS Guard | Machine Learning Project | "
-    "TF-IDF + Multinomial Naive Bayes"
 )
