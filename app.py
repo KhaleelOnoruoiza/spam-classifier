@@ -1,4 +1,3 @@
-```python
 import streamlit as st
 from classifier import load_artifacts, predict_message
 
