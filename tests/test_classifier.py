@@ -85,4 +85,11 @@ def test_prediction_threshold():
         assert result["prediction"] == "spam"
     else:
         assert result["prediction"] == "ham"
+def test_artifacts_load_successfully():
+    """Verify that all three model artifacts load correctly."""
 
+    model, vectorizer, threshold = load_artifacts()
+
+    assert model is not None
+    assert vectorizer is not None
+    assert threshold == 0.20
