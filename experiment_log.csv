@@ -1,3 +1,4 @@
 experiment_id,date,model,feature_extraction,train_test_split,threshold,accuracy,precision,recall,f1_score,notes
 EXP001,Not recorded,Multinomial Naive Bayes,TF-IDF,80/20,0.50,0.9659,1.0000,0.7450,0.8538,Original baseline model
 EXP002,Not recorded,Multinomial Naive Bayes,TF-IDF,70/15/15,0.20,0.98,1.00,0.84,0.91,Improved model with validation-based threshold selection; metrics approximate
+EXP003,2026-11-07 20:59:57,Multinomial Naive Bayes,TF-IDF,70/15/15,0.20,0.978495,1.000000,0.839286,0.912621,Validation-selected threshold; evaluated on held-out test set
