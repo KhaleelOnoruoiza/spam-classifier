@@ -1,5 +1,4 @@
-
-
+```python
 import streamlit as st
 from classifier import load_artifacts, predict_message
 
@@ -35,225 +34,61 @@ except FileNotFoundError as error:
 
 
 # --------------------------------------------------
-# CUSTOM STYLING
+# DARK DASHBOARD STYLING
 # --------------------------------------------------
 
 st.markdown("""
 <style>
 
+/* Main application background */
 .stApp {
-    background-color: #F5F7FB;
+    background-color: #0B1120;
+    color: #E2E8F0;
 }
 
+/* Main content width */
 .block-container {
-    padding-top: 2rem;
-    max-width: 1100px;
+    max-width: 1150px;
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
 }
 
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #111C30;
+    border-right: 1px solid #24344F;
+}
+
+section[data-testid="stSidebar"] * {
+    color: #CBD5E1;
+}
+
+/* Header */
 .main-title {
     font-size: 2.5rem;
-    font-weight: 750;
-    color: #172B4D;
+    font-weight: 800;
+    color: #F8FAFC;
     letter-spacing: -1px;
 }
 
 .subtitle {
-    color: #64748B;
+    color: #94A3B8;
     font-size: 1rem;
-    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
 }
 
 .section-title {
-    color: #172B4D;
-    font-size: 1.15rem;
-    font-weight: 650;
+    color: #E2E8F0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.7rem;
 }
 
-div.stButton > button {
-    background-color: #1677D2;
-    color: white;
-    border-radius: 9px;
-    border: none;
-    padding: 0.65rem 1rem;
-    font-weight: 600;
-    width: 100%;
+/* Accent text */
+.accent {
+    color: #38BDF8;
 }
 
-div.stButton > button:hover {
-    background-color: #105DA8;
-    color: white;
-}
-
-div[data-testid="stMetric"] {
-    background-color: white;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #E2E8F0;
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-
-# --------------------------------------------------
-# SIDEBAR
-# --------------------------------------------------
-
-with st.sidebar:
-
-    st.title("🛡️ SMS Guard")
-
-    st.caption("INTELLIGENT MESSAGE SECURITY")
-
-    st.divider()
-
-    st.subheader("About this project")
-
-    st.write(
-        "SMS Guard uses machine learning to identify "
-        "potential spam messages and distinguish them "
-        "from legitimate SMS messages."
-    )
-
-    st.divider()
-
-    st.subheader("Model information")
-
-    st.write("**Algorithm:** Multinomial Naive Bayes")
-    st.write("**Feature extraction:** TF-IDF")
-    st.write(f"**Decision threshold:** {threshold:.2f}")
-
-    st.divider()
-
-    st.caption("Developed by Khaleel Onoruoiza")
-
-
-# --------------------------------------------------
-# MAIN HEADER
-# --------------------------------------------------
-
-st.markdown(
-    '<div class="main-title">SMS Message Analysis</div>',
-    unsafe_allow_html=True
-)
-
-st.markdown(
-    '<div class="subtitle">'
-    'Check whether an SMS message is potentially spam '
-    'using a trained machine learning model.'
-    '</div>',
-    unsafe_allow_html=True
-)
-
-
-# --------------------------------------------------
-# MESSAGE INPUT
-# --------------------------------------------------
-
-st.markdown(
-    '<div class="section-title">Enter your message</div>',
-    unsafe_allow_html=True
-)
-
-with st.form("message_form"):
-
-    msg = st.text_area(
-        "SMS message",
-        placeholder="Paste or type your SMS message here...",
-        height=160,
-        label_visibility="collapsed"
-    )
-
-    submitted = st.form_submit_button(
-        "Analyse Message"
-    )
-
-
-# --------------------------------------------------
-# CLASSIFICATION
-# --------------------------------------------------
-
-if submitted:
-
-    try:
-        result = predict_message(
-            msg,
-            model,
-            vectorizer,
-            threshold
-        )
-
-        prediction = result["prediction"]
-        spam_probability = result["spam_probability"]
-
-        if prediction == "spam":
-
-            st.error("Potential Spam Detected")
-
-            st.write(
-                "The model has classified this message as spam."
-            )
-
-        else:
-
-            st.success("Message Classified as Ham")
-
-            st.write(
-                "The model has classified this message as "
-                "ham (not spam)."
-            )
-
-        # Display probability information
-        st.divider()
-
-        st.subheader("Analysis details")
-
-        col1, col2 = st.columns(2)
-
-        with col1:
-            st.metric(
-                "Estimated spam probability",
-                f"{spam_probability * 100:.2f}%"
-            )
-
-        with col2:
-            st.metric(
-                "Decision threshold",
-                f"{threshold * 100:.0f}%"
-            )
-
-        st.progress(float(spam_probability))
-
-        st.caption(
-            "The probability is the model's estimate, not a "
-            "guarantee. A message classified as ham may still "
-            "be unwanted or fraudulent."
-        )
-
-    except ValueError as error:
-        st.warning(str(error))
-
-
-# --------------------------------------------------
-# MODEL PERFORMANCE
-# --------------------------------------------------
-
-st.divider()
-
-st.subheader("Model performance")
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.metric("Test accuracy", "~98%")
-
-with col2:
-    st.metric("Spam recall", "~84%")
-
-with col3:
-    st.metric("Spam precision", "100%")
-
-st.caption(
-    "Performance figures are from the reported held-out test "
-    "evaluation. Actual results may vary on new messages."
-)
+/* Text input */
+.stTextArea textarea
